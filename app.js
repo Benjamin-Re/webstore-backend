@@ -9,9 +9,11 @@ const cors = require('cors');
 // Read the env config file
 require('dotenv').config();
 // DB connection string
-const conn = process.env.DATABASE_URL;
+// const conn = process.env.DATABASE_URL;
+const connWeb = 
+"mongodb+srv://ben:Mongo-Store@webstore.srqqiyl.mongodb.net/webstore?retryWrites=true&w=majority";
 // DB connection
-mongoose.connect(conn);
+mongoose.connect(connWeb);
 const database = mongoose.connection;
 // Verify DB connection
 database.on('err', (err)=>{
