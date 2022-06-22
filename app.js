@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const port = 8000;
+// const port = 8000;
 const products = require('./Controller/productsController');
 const orders = require('./Controller/ordersController');
 const users = require('./Controller/usersController');
@@ -39,6 +39,6 @@ app.use("/orders", orders);
 app.use("/users", users);
 
 // Start server
-app.listen(port, ()=>{
-    console.log(`server running at http://localhost:${port}`);
+app.listen(process.env.PORT, ()=>{
+    console.log(`server running on some ? port`);
 })
