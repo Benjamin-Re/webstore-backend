@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
         type: String
     },
     orders: {
-        required: true,
         type: Array
     }
 },

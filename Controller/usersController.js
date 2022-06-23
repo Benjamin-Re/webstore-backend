@@ -20,13 +20,12 @@ router.get('/', (req, res)=>{
 })
 
 // Post document
-router.post('/', (req, res)=>{
+router.post('/signup', (req, res)=>{
     const data = new Model({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        password: req.body.password,
-        orders: req.body.orders,
+        password: req.body.password
     })
     data.save().then((data) => {
         res.status(201).json({
