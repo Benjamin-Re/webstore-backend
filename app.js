@@ -39,6 +39,7 @@ app.use("/orders", orders);
 app.use("/users", users);
 
 // Start server
-app.listen(process.env.PORT, ()=>{
-    console.log(`server running on some ? port`);
+app.listen(process.env.PORT || 8000, ()=>{
+    console.log(`server running on port`);
 })
+
