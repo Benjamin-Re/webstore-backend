@@ -21,18 +21,19 @@ router.get('/', (req, res)=>{
     })
 })
 
-// Post document
 router.post('/signup', (req, res)=>{
-    const data = new Model({
+    const user = new Model({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password
     })
-    data.save().then((data) => {
+    user.save().then((user) => {
+        const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
         res.status(201).json({
+            accessToken,
             status: "succeeded",
-            data,
+            user,
             error: null
         })
     }).catch((error) => {
@@ -44,7 +45,6 @@ router.post('/signup', (req, res)=>{
     })
 })
 
-// Post document
 router.post('/login', (req, res)=>{
     const user = Model.findOne({
         email: req.body.email,
