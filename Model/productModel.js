@@ -14,6 +14,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         type: Number
     },
+    quantity: {
+        required: true,
+        type: Number
+    }
 },
 {
     versionKey: false

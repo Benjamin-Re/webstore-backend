@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../Model/userModel');
+const User = require('../Model/userModel');
+const Product = require('../Model/productModel');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 // Get all users from collection
 router.get('/', (req, res)=>{
-    Model.find().then((data) => {
+    User.find().then((data) => {
         res.status(200).json({
             status: 'suceeded',
             data,
@@ -24,7 +25,7 @@ router.get('/', (req, res)=>{
 // Get one user from collection
 router.get('/:id', authenticateToken, (req, res)=>{
     let id = req.params.id;
-    Model.findById(id).then((data) => {
+    User.findById(id).then((data) => {
         res.status(200).json({
             status: 'suceeded',
             data,
@@ -40,7 +41,7 @@ router.get('/:id', authenticateToken, (req, res)=>{
 })
 
 router.post('/signup', (req, res)=>{
-    const user = new Model({
+    const user = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
@@ -64,7 +65,7 @@ router.post('/signup', (req, res)=>{
 })
 
 router.post('/login', (req, res)=>{
-    const user = Model.findOne({
+    const user = User.findOne({
         email: req.body.email,
         password: req.body.password
     })
@@ -90,7 +91,7 @@ router.patch('/:id', authenticateToken, (req, res)=>{
     let id = req.params.id;
     let data = req.body;
     let options = { new: true }; // true to return the updated obj not original
-    Model.findByIdAndUpdate(id, { $push: {orders: data} }, options) // Need $push to not overwrite
+    User.findByIdAndUpdate(id, { $push: {orders: data} }, options) // Need $push to not overwrite
     .then( (data) => {
         res.status(200).json({
             status: "succeeded",
