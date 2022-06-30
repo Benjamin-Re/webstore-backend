@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Model = require("../Model/productModel");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Get all documents from collection
 router.get("/", (req, res) => {
@@ -22,11 +24,10 @@ router.get("/", (req, res) => {
 });
 
 // Patch product (quantity) after order
-router.patch("/:id", (req, res) => {
+router.patch("/:id", authenticateToken,(req, res) => {
   let id = req.params.id;
   let data = req.body;
   let reduceBy = data.quantity;
-  console.log(reduceBy);
   Model.findOneAndUpdate(
     { id: id },
     {
