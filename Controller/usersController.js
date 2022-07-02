@@ -45,9 +45,11 @@ router.post('/signup', (req, res)=>{
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        address: req.body.address,
     })
     user.save().then((user) => {
+        console.log(`New user: ${user}`)
         const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
         res.status(201).json({
             accessToken,
@@ -107,6 +109,31 @@ router.patch('/:id', authenticateToken, (req, res)=>{
         })
     })
 })
+
+// Patch user
+router.patch('/profile/:id', (req, res)=>{
+    let id = req.params.id;
+    let data = req.body;
+    let options = { new: true }; 
+    User.findByIdAndUpdate(id, data, options) 
+    .then( (data) => {
+        res.status(200).json({
+            status: "succeeded",
+            data,
+            error: null
+        })
+    })
+    .catch((error) => {
+        res.status(404).json({
+            status: "failed",
+            error,
+            error: error.message
+        })
+    })
+})
+
+
+
 
 // middleware to check if user is logged in
 function authenticateToken(req, res, next) {

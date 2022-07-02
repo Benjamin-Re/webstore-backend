@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const addressSchema = new mongoose.Schema({
+    street: String,
+    postal: Number
+})
+
 const userSchema = new mongoose.Schema({
     first_name: {
         required: true,
@@ -19,6 +24,10 @@ const userSchema = new mongoose.Schema({
     },
     orders: {
         type: Array
+    },
+    address: {
+        required: true,
+        type: addressSchema,
     }
 },
 {
