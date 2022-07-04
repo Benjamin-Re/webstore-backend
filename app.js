@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const port = 8000;
 const products = require('./Controller/productsController');
 const orders = require('./Controller/ordersController');
 const users = require('./Controller/usersController');
@@ -9,7 +8,7 @@ const cors = require('cors');
 // Read the env config file
 require('dotenv').config();
 // DB connection string
-// const conn = process.env.DATABASE_URL;
+// const conn = process.env.DATABASE_URL; < for local 
 const connWeb = 
 "mongodb+srv://ben:Mongo-Store@webstore.srqqiyl.mongodb.net/webstore?retryWrites=true&w=majority";
 // DB connection
@@ -26,7 +25,7 @@ database.once('connected', ()=> {
 // Config the app
 const app = express();
 app.use(express.json());
-// OMG it WORKS!!! You have to put it before using the route , oMG !!
+// You have to put cors before using the route!!
 app.use(
     cors({
         origin: "*",
