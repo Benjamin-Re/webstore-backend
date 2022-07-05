@@ -4,7 +4,7 @@ const Model = require("../Model/productModel");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// Get all documents from collection
+// Get all products from collection
 router.get("/", (req, res) => {
   Model.find()
     .then((data) => {
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// Patch product (quantity) after order
+// Patch product, reduce stock by quantity purchased
 router.patch("/:id", authenticateToken,(req, res) => {
   let id = req.params.id;
   let data = req.body;
@@ -32,7 +32,7 @@ router.patch("/:id", authenticateToken,(req, res) => {
     { id: id },
     {
       $inc: {
-        quantity: reduceBy
+        stock: reduceBy
       }
     },
     { new: true }
