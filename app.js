@@ -24,6 +24,8 @@ database.once('connected', ()=> {
 
 // Config the app
 const app = express();
+app.use(express.static('public'));
+
 app.use(express.json());
 // You have to put cors before using the route!!
 app.use(
