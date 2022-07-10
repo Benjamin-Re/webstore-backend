@@ -73,11 +73,11 @@ router.post('/login', (req, res)=>{
     })
     .then((user) => {
         const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
-        const role = user.role;
+        // const role = user.role;
         const userId = user._id;
         res.status(201).json({
             accessToken,
-            role,
+            // role,
             userId,
             status: "succeeded",
             error: null
