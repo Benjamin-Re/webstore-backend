@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const products = require("./Controller/productsController");
-const orders = require("./Controller/ordersController");
 const users = require("./Controller/usersController");
 const cors = require("cors");
 
@@ -37,10 +36,9 @@ app.use(
 );
 app.use(express.static("public"));
 app.use("/products", products);
-app.use("/orders", orders);
 app.use("/users", users);
 
 // Start server
 app.listen(process.env.PORT || 8000, () => {
-  console.log(`server running on port`);
+  console.log(`server running`);
 });

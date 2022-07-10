@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
     address: {
         required: true,
         type: addressSchema,
+    },
+    role: {
+        type: String,
     }
 },
 {

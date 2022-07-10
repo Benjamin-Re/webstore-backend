@@ -40,6 +40,7 @@ router.get('/:id', authenticateToken, (req, res)=>{
     })
 })
 
+// POST new user
 router.post('/signup', (req, res)=>{
     const user = new User({
         first_name: req.body.first_name,
@@ -49,7 +50,6 @@ router.post('/signup', (req, res)=>{
         address: req.body.address,
     })
     user.save().then((user) => {
-        console.log(`New user: ${user}`)
         const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
         res.status(201).json({
             accessToken,
@@ -73,10 +73,13 @@ router.post('/login', (req, res)=>{
     })
     .then((user) => {
         const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
+        const role = user.role;
+        const userId = user._id;
         res.status(201).json({
             accessToken,
+            role,
+            userId,
             status: "succeeded",
-            user,
             error: null
         })
     }).catch((error) => {

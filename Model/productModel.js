@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-    id: {
-        required: true,
-        unique: true,
-        type: Number
-    },
     name: {
         required: true,
         type: String
@@ -17,6 +12,9 @@ const productSchema = new mongoose.Schema({
     stock: {
         required: true,
         type: Number
+    },
+    imgSrc: {
+        type: String,
     }
 },
 {
@@ -24,3 +22,9 @@ const productSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("product", productSchema);
+
+
+/*
+
+"name":"Pencils","price":"12.99","stock":"10","imgSrc":"products/pencils.jpg"
+    */
