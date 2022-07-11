@@ -39,10 +39,11 @@ router.get("/", (req, res) => {
 // Patch product, reduce stock by quantity purchased
 router.patch("/:id", authenticateToken,(req, res) => {
   let id = req.params.id;
+  console.log(id);
   let data = req.body;
   let reduceBy = data.quantity;
   Model.findOneAndUpdate(
-    { id: id },
+    { _id: id },
     {
       $inc: {
         stock: reduceBy
